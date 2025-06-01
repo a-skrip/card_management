@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Alexey Skripnichenko
+      changes:
+        - createTable:
+            tableName: bank_cards
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: card_number  # Явно указываем snake_case
+                  type: VARCHAR(16)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: card_holder_name
+                  type: VARCHAR(30)
+              - column:
+                  name: expiry_date
+                  type: VARCHAR(5)  # Или DATE, если нужен тип даты
+              - column:
+                  name: status
+                  type: VARCHAR(15)
+              - column:
+                  name: balance
+                  type: DOUBLE PRECISION     #DECIMAL(19, 4)  # 19 цифр всего, 4 после запятой
