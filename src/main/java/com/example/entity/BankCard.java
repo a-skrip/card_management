@@ -1,7 +1,6 @@
-package com.example.bankcards.entity;
+package com.example.entity;
 
 
-import com.example.bankcards.enums.CardStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,13 +15,10 @@ import java.util.UUID;
 public class BankCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String cardNumber; // Зашифрованное значение
-
-    @Column(nullable = false)
-    private String maskedNumber; // "**** **** **** 1234"
 
     @Column(nullable = false)
     private String cardHolderName;
@@ -31,10 +27,15 @@ public class BankCard {
     private String expiryDate; // MM/yy
 
     @Enumerated(EnumType.STRING)
-    private CardStatus status = CardStatus.ACTIVE;
+    private CardStatus status;
 
     @Column(nullable = false)
     private BigDecimal balance = BigDecimal.ZERO;
+
+
+//    @Column(nullable = false)
+//    private String maskedNumber; // "**** **** **** 1234"
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

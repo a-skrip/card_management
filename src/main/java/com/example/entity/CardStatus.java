@@ -1,4 +1,4 @@
-package com.example.bankcards.enums;
+package com.example.entity;
 
 public enum CardStatus {
     ACTIVE, BLOCKED, EXPIRED
