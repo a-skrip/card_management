@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     void deleteUserById(Long userId);
 
-    //TODO Переделать на Entity
+    //TODO Переделать на Entity надо
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO users (email, password, role) VALUES (:email, :password, :role)", nativeQuery = true)
