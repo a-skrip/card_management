@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,9 +24,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    //    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankCard> cards = new ArrayList<>();

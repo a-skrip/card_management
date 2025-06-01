@@ -29,4 +29,4 @@ databaseChangeLog:
                   type: VARCHAR(15)
               - column:
                   name: balance
-                  type: DECIMAL(19, 4)  # 19 цифр всего, 4 после запятой
+                  type: DOUBLE PRECISION     #DECIMAL(19, 4)  # 19 цифр всего, 4 после запятой

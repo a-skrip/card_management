@@ -1,26 +1,27 @@
 package com.example.controller;
 
 
-
-import com.example.entity.Role;
-import com.example.entity.User;
-import com.example.service.UserService;
+import com.example.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @PostMapping("/new")
-    public ResponseEntity<User> createUser(String email, String password, Role role) {
+    public void createUser(@RequestParam String email,
+                           @RequestParam String password,
+                           @RequestParam String role) {
 
-        return  ResponseEntity.ok(userService.createUser(email, password, role));
+        userService.createUser(email, password, role);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
     }
 }
