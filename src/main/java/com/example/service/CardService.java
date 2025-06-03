@@ -16,7 +16,7 @@ public interface CardService {
 
     void transferCardToCard(Long fromCardId, Long toCardId, Double amount);
 
-    void setStatusCard(Long cardId, String statusCard);
+    BankCard setStatusCard(Long cardId, String statusCard);
 
     void deleteCard(Long cardId);
 

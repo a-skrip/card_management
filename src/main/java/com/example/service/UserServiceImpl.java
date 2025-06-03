@@ -4,6 +4,7 @@ import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -22,8 +23,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        userRepository.deleteUserById(userId);
+    @Transactional
+    public void removeUser(Long userId) {
+        userRepository.removeUserById(userId);
 
     }
 }

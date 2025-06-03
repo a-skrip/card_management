@@ -20,8 +20,8 @@ public class UserController {
         userService.createUser(email, password, role);
     }
 
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.removeUser(id);
     }
 }

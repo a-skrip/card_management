@@ -28,13 +28,10 @@ public interface CardRepository extends JpaRepository<BankCard, Long> {
                     @Param("cardHolderName") String cardHolderName,
                     @Param("expiryDate") String expiryDate,
                     @Param("cardStatus") String cardStatus,
-                    @Param("balance") Double balance);
+                    @Param("balance") Double balance) ;
 
 
     void deleteBankCardById(Long cardId);
 
-//    BankCard updat(Long cardID, Double balance);
-
-//    void updateBankCardByIdAndCardStatus(Long cardId);
 
 }

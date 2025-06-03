@@ -57,25 +57,40 @@ public class CardServiceImpl implements CardService {
     public void transferCardToCard(Long fromCardId, Long toCardId, Double amount) {
 
         BankCard fromBankCard = cardRepository.findBankCardById(fromCardId);
-        Double balanceFrom = fromBankCard.getBalance();
-        Double minus = balanceFrom - amount;
-        fromBankCard.setBalance(minus);
 
-        BankCard toBankCard = cardRepository.findBankCardById(toCardId);
-        Double balanceTo = toBankCard.getBalance();
-        Double plus = balanceTo + amount;
-        toBankCard.setBalance(plus);
+        if (fromBankCard.getBalance() > 0 && fromBankCard.getBalance() >= amount) {
+
+            Double balanceFrom = fromBankCard.getBalance();
+            Double minus = balanceFrom - amount;
+            fromBankCard.setBalance(minus);
+
+            cardRepository.save(fromBankCard);
+
+            BankCard toBankCard = cardRepository.findBankCardById(toCardId);
+            Double balanceTo = toBankCard.getBalance();
+            Double plus = balanceTo + amount;
+            toBankCard.setBalance(plus);
+
+            cardRepository.save(toBankCard);
+        } else {
+            throw new RuntimeException("Не достаточно средств! ");
+        }
 
     }
 
     @Override
-    public void setStatusCard(Long cardId, String status) {
-        BankCard bankCardById = cardRepository.findBankCardById(cardId);
-        bankCardById.setCardStatus(status);
+    public BankCard setStatusCard(Long cardId, String status) {
+        BankCard bankCard = cardRepository.findBankCardById(cardId);
+        bankCard.setStatus(status);
+        return cardRepository.save(bankCard);
+
     }
 
     @Override
+    @Transactional
     public void deleteCard(Long cardId) {
         cardRepository.deleteBankCardById(cardId);
     }
+
+
 }

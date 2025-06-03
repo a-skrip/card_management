@@ -24,7 +24,7 @@ public class BankCard {
     private String expiryDate; // MM/yy
 
     @Column(nullable = false)
-    private String cardStatus;
+    private String status;
 
     @Column(nullable = false)
     private Double balance;

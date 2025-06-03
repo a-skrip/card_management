@@ -22,7 +22,7 @@ public class CardController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<Double> getBalance(Long cardId) {
+    public ResponseEntity<Double> getBalance(@RequestParam Long cardId) {
         return ResponseEntity.ok(cardService.getBalance(cardId));
     }
 
@@ -32,12 +32,34 @@ public class CardController {
                         @RequestParam String expiryDate,
                         @RequestParam String cardStatus,
                         @RequestParam Double balance
-            ) {
+    ) {
         cardService.createCard(cardNumber, cardHolderName, expiryDate, cardStatus, balance);
     }
 
     @PutMapping("/balance")
-    public void setBalance(Long cardId, Double balance) {
+    public void setBalance(@RequestParam Long cardId,
+                           @RequestParam Double balance) {
         cardService.setBalance(cardId, balance);
     }
+
+    @PostMapping("/status")
+    public ResponseEntity<BankCard> setStatus(@RequestParam Long cardId, @RequestParam String status) {
+        return ResponseEntity.ok(cardService.setStatusCard(cardId, status));
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferCardToCard(@RequestParam Long fromCardId,
+                                                     @RequestParam Long toCardId,
+                                                     @RequestParam Double amount) {
+        cardService.transferCardToCard(fromCardId, toCardId, amount);
+        return ResponseEntity.ok("TRANSFER OK");
+    }
+
+
+    @DeleteMapping("/{cardId}")
+    public void deleteCard(@PathVariable Long cardId) {
+        cardService.deleteCard(cardId);
+
+    }
+
 }
