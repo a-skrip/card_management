@@ -2,7 +2,9 @@ package com.example.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 @Setter
 @Table(name = "users")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -24,9 +28,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    //    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role;
+    private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankCard> cards = new ArrayList<>();

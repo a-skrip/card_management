@@ -1,8 +1,11 @@
 package com.example.controller;
 
 
+import com.example.entity.Role;
+import com.example.entity.User;
 import com.example.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,11 +16,11 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping("/new")
-    public void createUser(@RequestParam String email,
-                           @RequestParam String password,
-                           @RequestParam String role) {
+    public ResponseEntity<User> createUser(@RequestParam String email,
+                                     @RequestParam String password,
+                                     @RequestParam String role) {
 
-        userService.createUser(email, password, role);
+        return ResponseEntity.ok(userService.createUser(email, password, Role.valueOf(role)));
     }
 
     @DeleteMapping("/{id}")
@@ -25,3 +28,4 @@ public class UserController {
         userService.removeUser(id);
     }
 }
+

@@ -1,6 +1,17 @@
 package com.example.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Role {
 
-    ROLE_ADMIN, ROLE_USER
+
+    ROLE_ADMIN("ADMIN"),
+    ROLE_USER("USER");
+
+    private final String value;
+
+
 }

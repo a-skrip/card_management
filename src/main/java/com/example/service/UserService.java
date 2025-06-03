@@ -1,8 +1,12 @@
 package com.example.service;
 
+import com.example.entity.Role;
+import com.example.entity.User;
+
 public interface UserService {
 
-    void createUser(String email, String password, String role);
+    User createUser(String email, String password, Role role);
+
 
     void removeUser(Long userId);
 }
